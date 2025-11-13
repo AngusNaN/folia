@@ -12,7 +12,5 @@ services:
             - MINECRAFT_EULA=true
         restart: always
         image: endkind/folia:latest
-        cpus: '0.1'
-
 volumes:
     endkind-folia:
