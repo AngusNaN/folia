@@ -4,6 +4,18 @@ RUN apt-get update && apt-get install -y \
     jq \
     mcrcon
 
+RUN apt-get update && \
+    apt-get install -y build-essential git && \
+    git clone https://github.com/Tiiffi/mcrcon.git && \
+    cd mcrcon && \
+    make && \
+    cp mcrcon /usr/local/bin/ && \
+    cd .. && \
+    rm -rf mcrcon && \
+    apt-get purge -y build-essential git && \
+    apt-get autoremove -y && \
+    rm -rf /var/lib/apt/lists/*
+
 LABEL Author Endkind Ender <endkind.ender@endkind.net>
 
 COPY getFolia.sh /endkind/getFolia.sh
