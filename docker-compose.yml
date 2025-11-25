@@ -10,7 +10,7 @@ services:
         volumes:
             - endkind-folia:/folia
         environment:
-            - MAX_RAM=3G
+            - MAX_RAM=24G
             - MINECRAFT_EULA=true
         restart: always
         image: endkind/folia:latest
