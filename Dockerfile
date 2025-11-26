@@ -20,7 +20,7 @@ RUN apt-get update && apt-get install -y tzdata
 
 ENV JAVA_OPTS="-Duser.timezone=Europe/Berlin"
 
-CMD ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
+CMD ["sh", "-c", "java $JAVA_OPTS -jar folia-1.21.8.jar"]
 
 LABEL Author Endkind Ender <endkind.ender@endkind.net>
 
