@@ -15,6 +15,12 @@ RUN apt-get update && \
     apt-get purge -y build-essential git && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
+    
+RUN apt-get update && apt-get install -y tzdata
+
+ENV JAVA_OPTS="-Duser.timezone=Europe/Berlin"
+
+CMD ["sh", "-c", "java $JAVA_OPTS -jar app.jar"]
 
 LABEL Author Endkind Ender <endkind.ender@endkind.net>
 
