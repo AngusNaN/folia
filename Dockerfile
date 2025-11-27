@@ -1,26 +1,17 @@
 FROM eclipse-temurin:latest
 
 RUN apt-get update && \
-    apt-get install -y curl jq tzdata git build-essential && \
-    date > /tmp/cache_breaker.txt && \
-    \
+    apt-get install -y curl jq git build-essential && \
+    rm -rf /var/lib/apt/lists/*
 
-    git clone https://github.com/Tiiffi/mcrcon.git /tmp/mcrcon-build && \
+RUN git clone https://github.com/Tiiffi/mcrcon.git /tmp/mcrcon-build && \
     cd /tmp/mcrcon-build && \
     make && \
-    \
+    mv mcrcon /usr/bin/mcrcon
 
-    mv mcrcon /usr/bin/mcrcon && \
-    \
-
-    cd / && \
-    rm -rf /tmp/mcrcon-build && \
-    apt-get purge -y git build-essential && \
+RUN apt-get purge -y git build-essential && \
     apt-get autoremove -y && \
-    rm -rf /var/lib/apt/lists/*
-    
-ENV TZ=Europe/Berlin
-ENV JAVA_OPTS="-Duser.timezone=Europe/Berlin"
+    rm -rf /var/lib/apt/apt/*
 
 LABEL Author Endkind Ender <endkind.ender@endkind.net>
 
