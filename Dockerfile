@@ -2,19 +2,23 @@ FROM eclipse-temurin:latest
 
 RUN apt-get update && \
     apt-get install -y curl jq tzdata git build-essential && \
+    date > /tmp/cache_breaker.txt && \
     \
 
     git clone https://github.com/Tiiffi/mcrcon.git /tmp/mcrcon-build && \
     cd /tmp/mcrcon-build && \
     make && \
-    cp mcrcon /usr/bin/mcrcon && \
     \
+
+    mv mcrcon /usr/bin/mcrcon && \
+    \
+
     cd / && \
     rm -rf /tmp/mcrcon-build && \
     apt-get purge -y git build-essential && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/lists/*
-
+    
 ENV TZ=Europe/Berlin
 ENV JAVA_OPTS="-Duser.timezone=Europe/Berlin"
 
