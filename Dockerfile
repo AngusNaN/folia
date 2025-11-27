@@ -3,7 +3,7 @@ FROM eclipse-temurin:latest
 RUN apt-get update && \
     apt-get install -y curl jq git build-essential && \
     rm -rf /var/lib/apt/lists/*
-
+    
 RUN git clone https://github.com/Tiiffi/mcrcon.git /tmp/mcrcon-build && \
     cd /tmp/mcrcon-build && \
     make && \
@@ -12,7 +12,7 @@ RUN git clone https://github.com/Tiiffi/mcrcon.git /tmp/mcrcon-build && \
 RUN apt-get purge -y git build-essential && \
     apt-get autoremove -y && \
     rm -rf /var/lib/apt/apt/*
-
+    
 LABEL Author Endkind Ender <endkind.ender@endkind.net>
 
 COPY getFolia.sh /endkind/getFolia.sh
